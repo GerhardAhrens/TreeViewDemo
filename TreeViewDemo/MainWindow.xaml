@@ -14,7 +14,7 @@
     </Window.Icon>
     <Grid x:Name="gridMain">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel
+        <WrapPanel
             Grid.Row="0"
             Grid.Column="0"
             Orientation="Horizontal">
@@ -105,7 +105,25 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-        </StackPanel>
+
+            <Button
+                x:Name="BtnBeispielE"
+                Width="170"
+                Height="30"
+                Margin="5,10,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView Rekursiv" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </WrapPanel>
 
         <TextBlock
             Grid.Row="1"

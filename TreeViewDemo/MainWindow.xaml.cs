@@ -59,6 +59,7 @@ namespace TreeViewDemo
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielB, "Click", this.OnClickBeispielB);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielC, "Click", this.OnClickBeispielC);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielD, "Click", this.OnClickBeispielD);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielE, "Click", this.OnClickBeispielE);
         }
 
         private void OnCloseApplication(object sender, RoutedEventArgs e)
@@ -125,9 +126,15 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielD(object sender, RoutedEventArgs e)
         {
-            TreeViewNodeModelDlg window = new TreeViewNodeModelDlg();
-            window.Owner = this;
-            window.ShowDialog();
+        }
+
+        /// <summary>
+        /// TreeView Rekursiv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielE(object sender, RoutedEventArgs e)
+        {
         }
 
         #region INotifyPropertyChanged implementierung
