@@ -16,6 +16,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace TreeViewDemo
 {
@@ -31,7 +32,7 @@ namespace TreeViewDemo
             this.InitializeComponent();
             WeakEventManager<Window, RoutedEventArgs>.AddHandler(this, "Loaded", this.OnLoaded);
 
-            this.WindowTitel = "Minimal WPF Template";
+            this.WindowTitel = "WPF TreeView Demo";
             this.DataContext = this;
         }
 
@@ -53,6 +54,80 @@ namespace TreeViewDemo
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnCloseApplication, "Click", this.OnCloseApplication);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielA, "Click", this.OnClickBeispielA);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielB, "Click", this.OnClickBeispielB);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielC, "Click", this.OnClickBeispielC);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielD, "Click", this.OnClickBeispielD);
+        }
+
+        private void OnCloseApplication(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+
+        private void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = false;
+
+            MessageBoxResult msgYN = MessageBox.Show("Wollen Sie die Anwendung beenden?", "Beenden", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (msgYN == MessageBoxResult.Yes)
+            {
+                App.ApplicationExit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// TreeView Statisch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielA(object sender, RoutedEventArgs e)
+        {
+            TreeViewStaticDlg window = new TreeViewStaticDlg();
+            window.Owner = this;
+            window.ShowDialog();
+        }
+
+        /// <summary>
+        /// TreeView dynamisch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielB(object sender, RoutedEventArgs e)
+        {
+            TreeViewDynamicDlg window = new TreeViewDynamicDlg();
+            window.Owner = this;
+            window.ShowDialog();
+        }
+
+        /// <summary>
+        /// TreeView Node Model Class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielC(object sender, RoutedEventArgs e)
+        {
+            TreeViewNodeModelDlg window = new TreeViewNodeModelDlg();
+            window.Owner = this;
+            window.ShowDialog();
+        }
+
+        /// <summary>
+        /// TreeView Listen für jede Ebene
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielD(object sender, RoutedEventArgs e)
+        {
+            TreeViewNodeModelDlg window = new TreeViewNodeModelDlg();
+            window.Owner = this;
+            window.ShowDialog();
         }
 
         #region INotifyPropertyChanged implementierung

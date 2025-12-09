@@ -24,4 +24,16 @@
     <Folder Include="Resources\Style\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Beispiele\TreeViewListenDlg.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Beispiele\TreeViewNodeModelDlg.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Beispiele\TreeViewDynamicDlg.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -14,21 +14,106 @@
     </Window.Icon>
     <Grid x:Name="gridMain">
         <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="727*" />
-            <ColumnDefinition Width="73*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock
+        <StackPanel
+            Grid.Row="0"
             Grid.Column="0"
-            Margin="279,0,0,0"
-            HorizontalAlignment="Left"
+            Orientation="Horizontal">
+            <Button
+                x:Name="BtnCloseApplication"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Left">
+                <Image Source="{StaticResource ResourceKey=IconApplicationExit}" Stretch="None" />
+            </Button>
+
+            <Button
+                x:Name="BtnBeispielA"
+                Width="150"
+                Height="30"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView statisch" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button
+                x:Name="BtnBeispielB"
+                Width="160"
+                Height="30"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView dynamisch" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button
+                x:Name="BtnBeispielC"
+                Width="170"
+                Height="30"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView NodeModel" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button
+                x:Name="BtnBeispielD"
+                Width="170"
+                Height="30"
+                Margin="5,0,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView Listen" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="24"
-            Text="Minimal WPF Template" />
+            Text="Verschiedene Lösungen zum TreeView in WPF." />
 
     </Grid>
 </Window>
