@@ -18,10 +18,19 @@
         public TreeViewNodeModelDlg()
         {
             this.InitializeComponent();
+            this.CreateTreeContent();
+        }
 
+        private void CreateTreeContent()
+        {
             WeakEventManager<TreeView, RoutedPropertyChangedEventArgs<object>>.AddHandler(this.MyTreeView, "SelectedItemChanged", this.OnSelectedItemChanged);
 
-            this.CreateTreeContent();
+            var rootNode = this.CreateDemoData().First(n => n.ParentId == null);
+            var rootItem = this.CreateItem(rootNode);
+            rootItem.IsExpanded = true;
+
+            this.BuildTree(rootItem, rootNode.Id);
+            this.MyTreeView.Items.Add(rootItem);
         }
 
         private void OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -32,40 +41,9 @@
             }
         }
 
-        private static List<Node> CreateDemoData()
-        {
-            List<Node> nodes = new()
-                {
-                    new Node { Id = 0, ParentId = null, Name = "Root", IsFolder = true },
-
-                    new Node { Id = 1, ParentId = 0, Name = "Child 1", IsFolder = true },
-                    new Node { Id = 2, ParentId = 0, Name = "Child 2", IsFolder = true },
-
-                    new Node { Id = 10, ParentId = 1, Name = "Child 1.1", IsFolder = true },
-                    new Node { Id = 11, ParentId = 1, Name = "Child 1.2", IsFolder = false },
-
-                    new Node { Id = 20, ParentId = 2, Name = "Child 2.1", IsFolder = false },
-
-                    new Node { Id = 100, ParentId = 10, Name = "Child 1.1 – Sub A", IsFolder = false },
-                    new Node { Id = 101, ParentId = 10, Name = "Child 1.1 – Sub B", IsFolder = false },
-                };
-
-            return nodes;
-        }
-
-        private void CreateTreeContent()
-        {
-            var rootNode = CreateDemoData().First(n => n.ParentId == null);
-            var rootItem = this.CreateItem(rootNode);
-            rootItem.IsExpanded = true;
-
-            BuildTree(rootItem, rootNode.Id);
-            this.MyTreeView.Items.Add(rootItem);
-        }
-
         private void BuildTree(TreeViewItem parentControl, int parentId)
         {
-            var children = CreateDemoData().Where(n => n.ParentId == parentId);
+            var children = this.CreateDemoData().Where(n => n.ParentId == parentId);
 
             foreach (var node in children)
             {
@@ -73,7 +51,7 @@
 
                 if (node.IsFolder)
                 {
-                    BuildTree(item, node.Id);
+                    this.BuildTree(item, node.Id);
                 }
 
                 parentControl.Items.Add(item);
@@ -84,13 +62,13 @@
         {
             TreeViewItem item = new TreeViewItem
             {
-                Tag = node,   // <-- Node am TreeViewItem speichern
-                 ContextMenu = CreateContextMenu(node)   // <-- Kontextmenü hier
+                Tag = node,                                     // <-- Node am TreeViewItem speichern
+                 ContextMenu = this.CreateContextMenu(node)     // <-- Kontextmenü hier
             };
 
             if (node.IsFolder)
             {
-                item.Header = CreateNodeHeader(node.Name, FOLDER_OPEN);
+                item.Header = this.CreateNodeHeader(node.Name, FOLDER_OPEN);
 
                 item.Expanded += (s, e) =>
                 {
@@ -110,13 +88,13 @@
             }
             else
             {
-                item.Header = CreateNodeHeader(node.Name, FILE);
+                item.Header = this.CreateNodeHeader(node.Name, FILE);
                 return item;
             }
         }
 
 
-        private static StackPanel CreateNodeHeader(string text, string nodeIcon)
+        private StackPanel CreateNodeHeader(string text, string nodeIcon)
         {
             StackPanel panel = new StackPanel
             {
@@ -133,7 +111,7 @@
             return panel;
         }
 
-        private static TreeViewItem CreateFolderItem(string headerText)
+        private TreeViewItem CreateFolderItem(string headerText)
         {
             var item = new TreeViewItem();
 
@@ -160,17 +138,17 @@
             return item;
         }
 
-        private static TreeViewItem CreateFileItem(string headerText)
+        private TreeViewItem CreateFileItem(string headerText)
         {
             var item = new TreeViewItem
             {
-                Header = CreateNodeHeader(headerText, FOLDER_CLOSE)
+                Header = this.CreateNodeHeader(headerText, FOLDER_CLOSE)
             };
 
             return item;
         }
 
-        private static MenuItem CreateMenuItemWithIcon(string text, string iconMenu)
+        private MenuItem CreateMenuItemWithIcon(string text, string iconMenu)
         {
             MenuItem menuItem = new MenuItem();
 
@@ -210,6 +188,27 @@
             menu.Items.Add(deleteItem);
 
             return menu;
+        }
+
+        private List<Node> CreateDemoData()
+        {
+            List<Node> nodes = new()
+                {
+                    new Node { Id = 0, ParentId = null, Name = "Root", IsFolder = true },
+
+                    new Node { Id = 1, ParentId = 0, Name = "Child 1", IsFolder = true },
+                    new Node { Id = 2, ParentId = 0, Name = "Child 2", IsFolder = true },
+
+                    new Node { Id = 10, ParentId = 1, Name = "Child 1.1", IsFolder = true },
+                    new Node { Id = 11, ParentId = 1, Name = "Child 1.2", IsFolder = false },
+
+                    new Node { Id = 20, ParentId = 2, Name = "Child 2.1", IsFolder = false },
+
+                    new Node { Id = 100, ParentId = 10, Name = "Child 1.1 – Sub A", IsFolder = false },
+                    new Node { Id = 101, ParentId = 10, Name = "Child 1.1 – Sub B", IsFolder = false },
+                };
+
+            return nodes;
         }
     }
 
