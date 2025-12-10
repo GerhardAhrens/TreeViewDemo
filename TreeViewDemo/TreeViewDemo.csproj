@@ -34,6 +34,9 @@
     <Compile Update="Beispiele\TreeViewDynamicDlg.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Beispiele\TreeViewRecursivDlg.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

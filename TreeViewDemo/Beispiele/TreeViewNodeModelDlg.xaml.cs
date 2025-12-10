@@ -15,6 +15,7 @@
         private const string FOLDER_OPEN = "M6.1,10L4,18V8H21A2,2 0 0,0 19,6H12L10,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H19C19.9,20 20.7,19.4 20.9,18.5L23.2,10H6.1M19,18H6L7.6,12H20.6L19,18Z";
         private const string FILE = "M14 2H6C4.89 2 4 2.9 4 4V20C4 21.11 4.89 22 6 22H18C19.11 22 20 21.11 20 20V8L14 2M18 20H6V4H13V9H18V20M9.54 15.65L11.63 17.74L10.35 19L7 15.65L10.35 12.3L11.63 13.56L9.54 15.65M17 15.65L13.65 19L12.38 17.74L14.47 15.65L12.38 13.56L13.65 12.3L17 15.65Z";
         private const string MENU = "M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z";
+        private const string DELETE = "M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z";
 
         public TreeViewNodeModelDlg()
         {
@@ -180,13 +181,13 @@
                 Orientation = Orientation.Horizontal
             };
 
-            Image img = GeometryTools.GeometryToImage(Geometry.Parse(iconMenu), Brushes.Orange);
+            System.Windows.Shapes.Path imgShape = GeometryTools.GetPathGeometry(iconMenu, Colors.Orange);
 
             TextBlock txt = new TextBlock { Text = text, Margin = new Thickness(5, 0, 0, 0) };
 
-            panel.Children.Add(img);
             panel.Children.Add(txt);
             menuItem.Header = panel;
+            menuItem.Icon = imgShape;
             return menuItem;
         }
 
@@ -200,13 +201,13 @@
             menu.Items.Add(openItem);
 
             // Info
-            var infoItem = new MenuItem { Header = "Informationen" };
+            var infoItem = CreateMenuItemWithIcon("Informationen", FILE);
             infoItem.Click += (s, e) =>
                 MessageBox.Show($"Name: {node.Name}\nID: {node.Id}\nParentId: {node.ParentId}");
             menu.Items.Add(infoItem);
 
             // Löschen
-            var deleteItem = new MenuItem { Header = "Löschen" };
+            var deleteItem = CreateMenuItemWithIcon("Löschen", DELETE);
             deleteItem.Click += (s, e) => MessageBox.Show($"Löschen von ID {node.Id}");
             menu.Items.Add(deleteItem);
 

@@ -12,15 +12,32 @@
         {
         }
 
-        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, Color iconColor)
+
+        /// <summary>
+        /// Icon aus String für PathGeometry erstellen
+        /// </summary>
+        /// <param name="iconString">Icon String</param>
+        /// <param name="iconColor">Icon Farbe</param>
+        /// <returns></returns>
+        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, Color iconColor, int size = 24)
         {
             return new System.Windows.Shapes.Path
             {
-                Height = 24.0,
-                Width = 24.0,
+                Height = size,
+                Width = size,
                 Fill = new SolidColorBrush(iconColor),
                 Data = Geometry.Parse(iconString)
             };
+        }
+
+        /// <summary>
+        /// Icon aus String für PathGeometry erstellen
+        /// </summary>
+        /// <param name="iconString">Icon String</param>
+        /// <returns></returns>
+        public static System.Windows.Shapes.Path GetPathGeometry(string iconString, int size = 24)
+        {
+            return GetPathGeometry(iconString, Colors.Black, size);
         }
 
         public static System.Windows.Shapes.Path GetPathGeometry(string iconString)

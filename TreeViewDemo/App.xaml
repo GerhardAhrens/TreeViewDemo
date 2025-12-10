@@ -12,6 +12,7 @@
                 <!--  Lokale Styles  -->
                 <ResourceDictionary Source="Resources\Style\Pictures.xaml" />
                 <ResourceDictionary Source="Resources\Style\XamlIcon.xaml" />
+                <ResourceDictionary Source="Resources\Style\MenuItemStyle.xaml" />
 
                 <!--  Externe Styles aus Bibliotheken  -->
             </ResourceDictionary.MergedDictionaries>
