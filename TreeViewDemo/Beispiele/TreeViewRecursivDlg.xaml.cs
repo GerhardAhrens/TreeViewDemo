@@ -25,10 +25,10 @@
             this.CreateTreeContent();
         }
 
-        private async Task CreateTreeContent()
+        private void CreateTreeContent()
         {
             string rootPath = @"C:\_Projekte";   // <<== Anpassen
-            var rootItem = CreateTreeItem(rootPath, isDirectory: true);
+            var rootItem = this.CreateTreeItem(rootPath, isDirectory: true);
             this.MyTreeView.Items.Add(rootItem);
         }
 
@@ -42,7 +42,7 @@
 
             item.ContextMenu = this.CreateContextMenu(path);
 
-            if (isDirectory)
+            if (isDirectory == true)
             {
                 // Platzhalter-Knoten für Lazy Loading
                 item.Items.Add(null);
@@ -138,8 +138,7 @@
     public static class ShellIconHelper
     {
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-        private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes,
-            ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
+        private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbFileInfo, uint uFlags);
 
         private const uint SHGFI_ICON = 0x100;
         private const uint SHGFI_SMALLICON = 0x1;
@@ -205,8 +204,8 @@
                 return null;
             }
 
-            var icon = System.Drawing.Icon.FromHandle(shinfo.hIcon);
-            var image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            Icon icon = System.Drawing.Icon.FromHandle(shinfo.hIcon);
+            BitmapSource image = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(icon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
             icon.Dispose();
             return image;
         }
