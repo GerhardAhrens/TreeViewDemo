@@ -13,6 +13,12 @@
     WindowStyle="ToolWindow"
     mc:Ignorable="d">
     <Grid>
-        <TreeView Name="MyTreeView" FontSize="18"/>
+        <TreeView Name="MyTreeView" FontSize="18">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem" >
+                    <EventSetter Event="Expanded" Handler="OnTreeExpanded" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
     </Grid>
 </Window>

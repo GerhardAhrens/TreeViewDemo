@@ -126,6 +126,9 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielD(object sender, RoutedEventArgs e)
         {
+            TreeViewListenDlg window = new TreeViewListenDlg();
+            window.Owner = this;
+            window.ShowDialog();
         }
 
         /// <summary>
