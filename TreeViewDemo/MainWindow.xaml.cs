@@ -13,13 +13,13 @@
 // </summary>
 //-----------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-
 namespace TreeViewDemo
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Controls;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -135,6 +135,9 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielE(object sender, RoutedEventArgs e)
         {
+            TreeViewRecursivDlg window = new TreeViewRecursivDlg();
+            window.Owner = this;
+            window.ShowDialog();
         }
 
         #region INotifyPropertyChanged implementierung
