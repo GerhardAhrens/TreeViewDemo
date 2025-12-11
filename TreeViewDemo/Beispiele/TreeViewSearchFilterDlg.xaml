@@ -12,7 +12,65 @@
     WindowState="Normal"
     WindowStyle="ToolWindow"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <local:HighlightTextConverter x:Key="HighlightTextConverter" />
+    </Window.Resources>
+
     <Grid>
-        <TreeView Name="MyTreeView" FontSize="18"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Orientation="Horizontal">
+
+            <TextBox
+                x:Name="SearchBox"
+                Width="200"
+                Height="25"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center" />
+
+            <Button
+                x:Name="BtnSuchen"
+                Width="100"
+                Height="25"
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                Content="Search &amp; Filter" />
+
+        </StackPanel>
+
+        <TreeView
+            x:Name="MyTreeView"
+            Grid.Row="1"
+            Grid.Column="0"
+            FontSize="18">
+            <TreeView.Resources>
+
+                <!--  Template für TreeItem  -->
+                <HierarchicalDataTemplate DataType="{x:Type local:TreeItem}" ItemsSource="{Binding Path=Children}">
+                    <TreeViewItem IsExpanded="{Binding Path=IsExpanded}">
+                        <TreeViewItem.Header>
+                            <TextBlock>
+                                <TextBlock.Inlines>
+                                    <InlineUIContainer>
+                                        <ContentPresenter Content="{Binding Converter={StaticResource HighlightTextConverter}}" />
+                                    </InlineUIContainer>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                        </TreeViewItem.Header>
+                    </TreeViewItem>
+                </HierarchicalDataTemplate>
+
+            </TreeView.Resources>
+        </TreeView>
     </Grid>
 </Window>
