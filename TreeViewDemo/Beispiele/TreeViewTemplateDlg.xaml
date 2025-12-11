@@ -1,0 +1,125 @@
+﻿<Window
+    x:Class="TreeViewDemo.TreeViewTemplateDlg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localBehaviors="clr-namespace:TreeViewDemo.Beispiele.Template"
+    xmlns:localVM="clr-namespace:TreeViewDemo.Beispiele.Template"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="TreeViewTemplateDlg"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowState="Normal"
+    WindowStyle="ToolWindow"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+
+        <DrawingImage x:Key="CategoryIcon">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="Blue" Geometry="M3,10 L3,4 L7,4 L9,6 L21,6 L21,10 Z" />
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <!--  Group Icon (Unterordner)  -->
+        <DrawingImage x:Key="GroupIcon">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="Green" Geometry="M3,9 L3,5 L7,5 L9,7 L21,7 L21,9 Z" />
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <!--  Item Icon (Dokument)  -->
+        <DrawingImage x:Key="ItemIcon">
+            <DrawingImage.Drawing>
+                <GeometryDrawing Brush="Orange" Geometry="M4,3 L16,3 L16,21 L4,21 Z" />
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
+        <!--  Ebene 1: Category  -->
+        <HierarchicalDataTemplate DataType="{x:Type localVM:Category}" ItemsSource="{Binding Path=Groups}">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            Command="{Binding Path=DataContext.CategoryMenuCommand, Source={x:Reference Name=MyTreeView}}"
+                            CommandParameter="{Binding}"
+                            Header="Kategorie bearbeiten" />
+                        <MenuItem Header="Neue Gruppe hinzufügen" />
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+
+                <Image
+                    Width="24"
+                    Height="24"
+                    Source="{StaticResource ResourceKey=CategoryIcon}"
+                    Stretch="None" />
+                <TextBlock
+                    Margin="5,0,0,0"
+                    FontSize="14"
+                    Text="{Binding Path=Name}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <!--  Ebene 2: Group  -->
+        <HierarchicalDataTemplate DataType="{x:Type localVM:Group}" ItemsSource="{Binding Path=Items}">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem
+                            Command="{Binding DataContext.GroupMenuCommand, Source={x:Reference Name=MyTreeView}}"
+                            CommandParameter="{Binding}"
+                            Header="Gruppe bearbeiten" />
+                        <MenuItem Header="Neues Item hinzufügen" />
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+
+                <Image
+                    Width="24"
+                    Height="24"
+                    Source="{StaticResource ResourceKey=GroupIcon}"
+                    Stretch="None" />
+
+                <TextBlock
+                    Margin="5,0,0,0"
+                    FontSize="14"
+                    Text="{Binding Path=Name}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <!--  Ebene 3: Item  -->
+        <DataTemplate DataType="{x:Type localVM:Item}">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel.ContextMenu>
+                    <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                        <MenuItem
+                            Command="{Binding DataContext.ItemMenuCommand, Source={x:Reference Name=MyTreeView}}"
+                            CommandParameter="{Binding}"
+                            Header="Item bearbeiten" />
+                        <MenuItem Header="Löschen" />
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+
+                <Image
+                    Width="24"
+                    Height="24"
+                    Source="{StaticResource ResourceKey=ItemIcon}"
+                    Stretch="None" />
+
+                <TextBlock
+                    Margin="5,0,0,0"
+                    FontSize="14"
+                    Text="{Binding Path=Name}" />
+            </StackPanel>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Grid>
+        <TreeView
+            x:Name="MyTreeView"
+            localBehaviors:TreeViewClickBehavior.ItemClickCommand="{Binding Path=ItemClickedCommand}"
+            FontSize="18"
+            ItemsSource="{Binding Path=Categories}" />
+    </Grid>
+</Window>

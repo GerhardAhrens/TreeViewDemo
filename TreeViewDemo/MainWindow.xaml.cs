@@ -60,6 +60,8 @@ namespace TreeViewDemo
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielC, "Click", this.OnClickBeispielC);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielD, "Click", this.OnClickBeispielD);
             WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielE, "Click", this.OnClickBeispielE);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielF, "Click", this.OnClickBeispielF);
+            WeakEventManager<Button, RoutedEventArgs>.AddHandler(this.BtnBeispielG, "Click", this.OnClickBeispielG);
         }
 
         private void OnCloseApplication(object sender, RoutedEventArgs e)
@@ -90,7 +92,7 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielA(object sender, RoutedEventArgs e)
         {
-            TreeViewStaticDlg window = new TreeViewStaticDlg();
+            TreeViewStaticDlg window = new();
             window.Owner = this;
             window.ShowDialog();
         }
@@ -102,7 +104,7 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielB(object sender, RoutedEventArgs e)
         {
-            TreeViewDynamicDlg window = new TreeViewDynamicDlg();
+            TreeViewDynamicDlg window = new();
             window.Owner = this;
             window.ShowDialog();
         }
@@ -114,7 +116,7 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielC(object sender, RoutedEventArgs e)
         {
-            TreeViewNodeModelDlg window = new TreeViewNodeModelDlg();
+            TreeViewNodeModelDlg window = new();
             window.Owner = this;
             window.ShowDialog();
         }
@@ -126,7 +128,7 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielD(object sender, RoutedEventArgs e)
         {
-            TreeViewListenDlg window = new TreeViewListenDlg();
+            TreeViewListenDlg window = new();
             window.Owner = this;
             window.ShowDialog();
         }
@@ -138,11 +140,34 @@ namespace TreeViewDemo
         /// <param name="e"></param>
         private void OnClickBeispielE(object sender, RoutedEventArgs e)
         {
-            TreeViewRecursivDlg window = new TreeViewRecursivDlg();
+            TreeViewRecursivDlg window = new();
             window.Owner = this;
             window.ShowDialog();
         }
 
+        /// <summary>
+        /// TreeView HierarchicalDataTemplate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielF(object sender, RoutedEventArgs e)
+        {
+            TreeViewTemplateDlg window = new();
+            window.Owner = this;
+            window.ShowDialog();
+        }
+
+        /// <summary>
+        /// TreeView HierarchicalDataTemplate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnClickBeispielG(object sender, RoutedEventArgs e)
+        {
+            TreeViewSearchFilterDlg window = new();
+            window.Owner = this;
+            window.ShowDialog();
+        }
         #region INotifyPropertyChanged implementierung
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {

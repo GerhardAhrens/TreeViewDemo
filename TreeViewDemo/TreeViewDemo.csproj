@@ -40,6 +40,12 @@
         <Compile Update="Beispiele\TreeViewRecursivDlg.xaml.cs">
             <SubType>Code</SubType>
         </Compile>
+        <Compile Update="Beispiele\TreeViewSearchFilterDlg.xaml.cs">
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Beispiele\TreeViewTemplateDlg.xaml.cs">
+          <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 
 </Project>

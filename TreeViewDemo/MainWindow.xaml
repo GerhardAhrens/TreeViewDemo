@@ -101,7 +101,7 @@
                             Margin="5,0,0,0"
                             FontSize="14"
                             FontWeight="Medium"
-                            Text="TreeView Listen" />
+                            Text="TreeView List&lt;T&gt;" />
                     </StackPanel>
                 </Button.Content>
             </Button>
@@ -120,6 +120,42 @@
                             FontSize="14"
                             FontWeight="Medium"
                             Text="TreeView Rekursiv" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button
+                x:Name="BtnBeispielF"
+                Width="270"
+                Height="30"
+                Margin="5,10,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView HierarchicalDataTemplate" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button
+                x:Name="BtnBeispielG"
+                Width="200"
+                Height="30"
+                Margin="5,10,0,0"
+                HorizontalAlignment="Left">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{StaticResource ResourceKey=IconTreeViewStatic}" Stretch="None" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            FontSize="14"
+                            FontWeight="Medium"
+                            Text="TreeView Search &amp; Filter" />
                     </StackPanel>
                 </Button.Content>
             </Button>
